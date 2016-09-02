@@ -2432,12 +2432,16 @@ void ChatHandler::ShowTicket(GMTicket const* ticket)
 bool ChatHandler::HandleTicketAcceptCommand(char* args)
 {
     char* px = ExtractLiteralArg(&args);
-
+    if (!px)
+    { return false; }
+    
+    // ticket accept on
     if (strncmp(px, "on", 3) == 0)
     {
         sTicketMgr.SetAcceptTickets(true);
         SendSysMessage(LANG_COMMAND_TICKETS_SYSTEM_ON);
     }
+    // ticket accept off
     else if (strncmp(px, "off", 4) == 0)
     {
         sTicketMgr.SetAcceptTickets(false);
